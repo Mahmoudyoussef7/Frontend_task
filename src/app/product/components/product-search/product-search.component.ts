@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ProductServiceService } from '../../services/product-service.service';
 
 @Component({
@@ -7,27 +8,28 @@ import { ProductServiceService } from '../../services/product-service.service';
   styleUrls: ['./product-search.component.scss']
 })
 export class ProductSearchComponent {
-  Products?: any;
-  substr? :string;
+  Products:any[]=[];
+  substr :any;
   headElements = ['ID', 'SKU', 'Description', 'Price','IsActive'];
-  previous?: string;
+
 
   constructor(private service: ProductServiceService) { }
 
   ngOnInit(): void {
   }
 
-  onClick(){
+  search(){
+    console.log(this.substr)
     debugger
     if(this.substr!=null)
     {
-      this.service.Search(this.substr,1,2).subscribe(res => {
+      this.service.Search(this.substr,1,20).subscribe(res => {
         this.Products = res;
-        debugger
         console.log(this.Products);
-      })
+      });
     }
   }
 }
+
 
 

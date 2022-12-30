@@ -1,37 +1,16 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 mx-auto">
-      <div class="md-form">
-        <input
-          type="text"
-          [(ngModel)]="substr"
-          class="form-control"
-          id="search"
-          mdbInput
-        />
-        <button (click)="onClick()">Search</button>
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <div class="dropdown">
+      <div id="myDropdown" class="dropdown-content">
+        <input class="form-control me-2" (keyup)="search() " [(ngModel)]="substr" type="search" placeholder="Search" aria-label="Search"/>
+
+        <ul class="list-group" *ngIf="Products">
+          <li class="list-group-item">sku</li>
+          <li class="list-group-item" *ngFor="let product of Products">
+            <a>{{product.sku}}</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-  <table mdbTable class="z-depth-1">
-    <thead>
-      <tr>
-        <th
-          *ngFor="let head of headElements; let i = index"
-          scope="col"
-        >
-          {{ head }}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let el of Products; let i = index">
-        <th scope="row">{{ el.ID }}</th>
-        <td class="red-text">{{ el.SKU }}</td>
-        <td>{{ el.Description }}</td>
-        <td>{{ el.Price }}</td>
-        <td>{{ el.IsActive }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+</nav>

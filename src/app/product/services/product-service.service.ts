@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
+import { map, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -20,9 +21,11 @@ export class ProductServiceService {
   constructor(private _http: HttpClient) {
   }
 
-  Search(str:string,a:number,b:number) {
-    //https://localhost:5001/api/Product?str=p&PageNumber=1&PageSize=2
-    return this._http.get<any>(`${environment.serviceUrl}/Product?str=${str}&PageNumber=${a}&PageSize=${b}`,this.options);
+  public searchResults:any;
+
+  Search(str:string,a:number,b:number):Observable<any> {
+    //https://localhost:5001/api/Product?str=p&PageNumber=1&PageSize=10
+    return this._http.get<any>(`${environment.serviceUrl}/Product?str=${str}&PageNumber=${a}&PageSize=${b}`);
   }
 
 }
