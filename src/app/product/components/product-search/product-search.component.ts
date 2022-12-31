@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable } from 'rxjs';
 import { ProductServiceService } from '../../services/product-service.service';
 
 @Component({
@@ -23,7 +23,8 @@ export class ProductSearchComponent {
     debugger
     if(this.substr!=null)
     {
-      this.service.Search(this.substr,1,20).subscribe(res => {
+      this.service.Search(this.substr,1,20).pipe(debounceTime(3000))
+      .subscribe(res => {
         this.Products = res;
         console.log(this.Products);
       });
